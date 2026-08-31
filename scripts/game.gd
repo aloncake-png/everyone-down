@@ -193,14 +193,16 @@ func _build_grid() -> void:
 			_set_cell(l[0] + i, l[1], WATER)
 			water_cells.append(Vector2i(l[0] + i, l[1]))
 			_set_cell(l[0] + i, l[1] + 1, ROCK)
-	for c in [Vector2i(9, 20), Vector2i(28, 22), Vector2i(15, 34), Vector2i(33, 38), Vector2i(7, 33)]:
-		for d in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(2, 1), Vector2i(1, 2)]:
-			_set_cell(c.x + d.x, c.y + d.y, IRON)
-			ore_left[Vector2i(c.x + d.x, c.y + d.y)] = BAL.ore_per_cell
-	for c in [Vector2i(12, 52), Vector2i(27, 50), Vector2i(18, 60), Vector2i(31, 60), Vector2i(8, 58)]:
-		for d in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1)]:
-			_set_cell(c.x + d.x, c.y + d.y, RARE)
-			ore_left[Vector2i(c.x + d.x, c.y + d.y)] = BAL.ore_per_cell
+	# ore lives IN the bedrock: glowing seams in the top face of the rock formations
+	var iron_blobs := [Vector2i(5, 14), Vector2i(31, 12), Vector2i(3, 30), Vector2i(34, 26), Vector2i(8, 44), Vector2i(30, 40)]
+	var rare_blobs := [Vector2i(14, 55), Vector2i(26, 58), Vector2i(6, 62)]
+	for bk in [[iron_blobs, IRON], [rare_blobs, RARE]]:
+		for bc in bk[0]:
+			for dx in range(-1, 2):
+				var vc := Vector2i(clampi(bc.x + dx, 1, TW - 2), bc.y - 1)
+				if grid[vc.y][vc.x] == ROCK:
+					_set_cell(vc.x, vc.y, bk[1])
+					ore_left[vc] = BAL.ore_per_cell
 	for v in vent_cells:
 		for dx in range(-1, 3):
 			_set_cell(v.x + dx, v.y + 1, ROCK)
@@ -1018,6 +1020,11 @@ func _paint_at_mouse() -> void:
 		return
 	if v != DIRT and v != ROCK:
 		return
+	for b in buildings:
+		for bc in b.cells:
+			if c == Vector2i(bc.x, bc.y + 1) and not Vector2i(bc.x, bc.y + 1) in b.cells:
+				toast("toast_support")
+				return
 	var mk := ColorRect.new()
 	mk.color = Color(1.0, 0.85, 0.4, 0.35)
 	mk.position = Vector2(c.x * T, c.y * T)
@@ -1733,17 +1740,19 @@ func _run_autotest() -> void:
 		[30.0, func(): _snap("t30")],
 		[30.5, func(): iron += 40],
 		[31.0, func(): _autopaint(Rect2i(6, 20, 3, 4))],
-		[56.0, func(): _try_place_at("power", Vector2i(6, 23))],
+		[9.5, func(): _autopaint(Rect2i(4, 11, 14, 2))],
+		[62.0, func(): _try_place_at("power", Vector2i(6, 23))],
+		[68.0, func(): if buildings.filter(func(b): return b.name == "power").is_empty(): _try_place_at("power", Vector2i(6, 23))],
 		[49.0, func(): _try_place_at("farm", Vector2i(22, 16))],
 		[52.0, func(): _try_place_at("lab", Vector2i(19, 16))],
-		[58.0, func(): _try_place_at("mine", Vector2i(10, 19))],
-		[66.0, func(): _card_test()],
-		[70.0, func(): _snap("t70")],
-		[71.0, func(): _set_rally(Vector2(18 * T, 12 * T))],
-		[72.0, func(): _force_breach()],
-		[78.0, func(): _snap("t78_fight")],
-		[84.0, func(): _snap("t84")],
-		[86.0, func(): get_tree().quit()],
+		[58.0, func(): _try_place_at("mine", Vector2i(4, 12))],
+		[72.0, func(): _card_test()],
+		[76.0, func(): _snap("t76")],
+		[77.0, func(): _set_rally(Vector2(18 * T, 12 * T))],
+		[78.0, func(): _force_breach()],
+		[84.0, func(): _snap("t84_fight")],
+		[90.0, func(): _snap("t90")],
+		[92.0, func(): get_tree().quit()],
 	]
 	for e in script:
 		get_tree().create_timer(e[0]).timeout.connect(e[1])

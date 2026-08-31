@@ -106,14 +106,21 @@ def tile_rock(variant):
     return im
 
 def tile_ore(kind, variant):
-    base = tile_dirt(variant + 20)
+    # ore VEIN tile: rock base with a bold glowing seam across the middle (reads like water does)
+    base = tile_rock(variant + 20)
     d = ImageDraw.Draw(base)
     c0, c1, c2 = (kind+"0", kind+"1", kind+"2")
-    spots = [(3, 4), (10, 3), (6, 10), (12, 11)] if variant % 2 == 0 else [(4, 3), (11, 6), (3, 11), (9, 12)]
-    for i, (x, y) in enumerate(spots):
-        rect(d, x, y, x+2, y+2, c0)
-        rect(d, x, y, x+1, y+1, c1)
-        px(d, x, y, c2)
+    # continuous seam band (edge-to-edge so neighboring vein tiles connect)
+    rect(d, 0, 6, 15, 10, c0)
+    # chunky nuggets in the band
+    spots = [(1, 6), (6, 7), (11, 6)] if variant % 2 == 0 else [(2, 7), (8, 6), (13, 7)]
+    for (x, y) in spots:
+        rect(d, x, y, min(x+3, 15), min(y+3, 10), c1)
+        rect(d, x, y, min(x+1, 15), y+1, c2)
+    # seam sparkle + soft top edge
+    for x in range(0, 16, 5):
+        px(d, (x + variant * 2) % 16, 5, c1)
+        px(d, (x + variant * 3) % 16, 11, c0)
     return base
 
 def tile_water(frame):
