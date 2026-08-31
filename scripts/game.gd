@@ -47,7 +47,7 @@ const BLD := {
 	"living":   {"size": Vector2i(3, 2), "sprite": "bld_living", "label": "n_living", "cost_iron": 10, "cost_rare": 0, "workers": 0, "beds": 8, "food": 0, "power": 0, "need": "", "tab": 0},
 	"farm":     {"size": Vector2i(3, 2), "sprite": "bld_farm", "label": "n_farm", "cost_iron": 8, "cost_rare": 0, "workers": 2, "beds": 0, "food": 30, "power": 0, "need": "water", "tab": 0},
 	"power":    {"size": Vector2i(2, 3), "sprite": "bld_power", "label": "n_power", "cost_iron": 12, "cost_rare": 0, "workers": 2, "beds": 0, "food": 0, "power": 40, "need": "vent", "tab": 0},
-	"mine":     {"size": Vector2i(2, 2), "sprite": "bld_mine", "label": "n_mine", "cost_iron": 10, "cost_rare": 0, "workers": 2, "beds": 0, "food": 0, "power": -5, "need": "ore", "tab": 0},
+	"mine":     {"size": Vector2i(2, 2), "sprite": "bld_mine", "label": "n_mine", "cost_iron": 10, "cost_rare": 0, "workers": 2, "beds": 0, "food": 0, "power": 0, "need": "ore", "tab": 0},
 	"lab":      {"size": Vector2i(2, 2), "sprite": "bld_lab1", "label": "n_lab", "cost_iron": 12, "cost_rare": 0, "workers": 2, "beds": 0, "food": 0, "power": -5, "need": "", "tab": 0},
 	"armory":   {"size": Vector2i(2, 2), "sprite": "bld_armory", "label": "n_armory", "cost_iron": 15, "cost_rare": 0, "workers": 2, "beds": 0, "food": 0, "power": -10, "need": "", "tab": 1},
 	"turret":   {"size": Vector2i(2, 2), "sprite": "bld_turret", "label": "n_turret", "cost_iron": 8, "cost_rare": 2, "workers": 1, "beds": 0, "food": 0, "power": -5, "need": "tech_arms", "tab": 1},
