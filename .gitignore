@@ -1,0 +1,7 @@
+.godot/
+tools/shots/
+tools/shots_game/
+tools/*.avi
+tools/autotest_log.txt
+tools/contact_sheet*.png
+tools/farm_check.png
