@@ -34,6 +34,12 @@ func _ready() -> void:
 	add_child(sub)
 	_button("res://assets/ui/btn_play.png", 205, func(): get_tree().change_scene_to_file("res://scenes/Game.tscn"))
 	_button("res://assets/ui/btn_movie.png", 245, func(): get_tree().change_scene_to_file("res://scenes/Main.tscn"))
+	var lb := Button.new()
+	lb.text = "LEMMINGS APOCALYPSE  (sign pivot, 2026-10-26)"
+	lb.position = Vector2(200, 290)
+	lb.size = Vector2(240, 24)
+	lb.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/Signs.tscn"))
+	add_child(lb)
 	# little parade of dudes across the bottom
 	for i in 6:
 		var s := Sprite2D.new()

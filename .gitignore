@@ -5,3 +5,6 @@ tools/*.avi
 tools/autotest_log.txt
 tools/contact_sheet*.png
 tools/farm_check.png
+tools/signs_sheet.png*
+tools/*.png.import
+docs/*.import
