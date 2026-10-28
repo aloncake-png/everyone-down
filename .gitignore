@@ -8,3 +8,4 @@ tools/farm_check.png
 tools/signs_sheet.png*
 tools/*.png.import
 docs/*.import
+build/

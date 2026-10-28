@@ -14,7 +14,11 @@
 ![A sign card](docs/pivot_card.png)
 ![Ladder shafts and rooms](docs/pivot_dig.png)
 
-### Run it
+### Just play it (Windows)
+**[Download LemmingsApocalypse-win64.zip](https://github.com/aloncake-png/everyone-down/releases/latest/download/LemmingsApocalypse-win64.zip)** — unzip, double-click `LemmingsApocalypse.exe`. No install. Windows SmartScreen may warn (unsigned build): *More info → Run anyway*.
+On the menu press **LEMMINGS APOCALYPSE** (bottom button) for the sign-economy mock-up; the other two buttons are the older prototype and the pitch movie.
+
+### Run it from source
 1. Godot 4.6.x (4.6.1 is what it was built with).
 2. Open this folder as a project, run `scenes/Signs.tscn` (or run the project and press the LEMMINGS APOCALYPSE button on the old menu).
 3. Press **1-4** (or click a category at the bottom) to open the sign wheel, pick a sign, plant it. Start with MOVEMENT → EXCAVATE under the trench. Left-click a planted sign for its card (Remove / Move / Pause). Right-click a sign to pick it up. WASD or right-drag pans, wheel zooms, P pauses.
